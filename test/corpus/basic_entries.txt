@@ -1,0 +1,54 @@
+=====
+
+entry {
+    id = new
+    date {
+        year = 2025
+        month = jan
+        day = 5
+    }
+
+    details {
+        A description in brackets.
+    }
+
+    for (entities->objects->leash_rings) in (assets->inventory->components) {
+        add 200.00
+    }
+}
+
+-----
+(entry
+  "entry"
+  "{"
+  (id
+    "id" "=" "new")
+  (date
+    "date"
+    "{"
+    (years "2025")
+    (months "jan")
+    (days "5")
+    "}"
+  )
+  (details
+    "details"
+    "{"
+    (string "A description in brackets.")
+    "}"
+  )
+  (transaction
+    "for"
+    "("
+    (entity_reference "entities" "->" "objects" "->" "leash_rings")
+    ")"
+    "in"
+    "("
+    (entity_reference "assets" "->" "inventory" "->" "components")
+    ")"
+    "{"
+    (special_transaction "add" "200.00")
+    "}"
+  )
+  "}"
+)

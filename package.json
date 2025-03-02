@@ -24,6 +24,7 @@
     "bindings/node/*",
     "queries/*",
     "src/**",
+    "test/corpus/*",
     "*.wasm"
   ],
   "dependencies": {

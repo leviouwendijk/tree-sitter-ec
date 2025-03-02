@@ -45,16 +45,44 @@ module.exports = grammar({
     ),
 
     id: $ => seq(
-      'id', '{',
-        repeat($._statement),
+      'id', 
+        choice(
+          $._id_new,
+          $._id_block
+        ),
+    ),
+
+    _id_block: $ => seq(
+      '{',
+          $.number,
       '}'
     ),
 
+    _id_new: $ => seq(
+      $.assignment,
+      $.dynamic_id
+    ),
+
+
     date: $ => seq(
-      'date', '{',
-        repeat($._statement),
+      'date',
+        choice(
+          $._date_new,
+          $._date_block
+        )
+    ),
+    
+    _date_block: $ => seq(
+      '{',
+        repeat($._date_options),
       '}'
     ),
+
+    _date_new: $ => seq(
+      $.assignment,
+      $.dynamic_date
+    ),
+
 
     details: $ => seq(
       'details', '{',
@@ -96,6 +124,74 @@ module.exports = grammar({
     special_transaction: $ => seq(
       choice('add', 'rm', 'remove', 'sub', 'subtract', 'credit', 'debit'),
       $.number
+    ),
+
+    dynamic_id: $ => seq(
+      choice(
+        'new',
+        'local'
+      ),
+    ),
+
+    dynamic_date: $ => seq(
+      choice(
+        'now',
+        'yesterday',
+        'tomorrow',
+        'last month',
+        'next month',
+        'last quarter',
+        'next quarter',
+        'last year',
+        'next year',
+      ),
+    ),
+
+    _date_options: $ => seq(
+      choice(
+        $.days, $.months, $.years
+      ),
+    ),
+
+    days: $ => seq(
+      choice(
+        'monday', 
+        'mon', 
+        'tuesday', 
+        'tue', 
+        'wednesday', 
+        'wed', 
+        'thursday', 
+        'thu', 
+        'friday', 
+        'fri', 
+        'saturday', 
+        'sat', 
+        'sunday', 
+        'sun', 
+      ),
+      $.number // until 7?
+    ),
+
+    months: $ => seq(
+      choice(
+        'january', 'jan', 
+        'february', 'feb', 
+        'march', 'mar', 
+        'april', 'apr', 
+        'may', 'may', 
+        'june', 'jun', 
+        'july', 'jul', 
+        'august', 'aug', 
+        'october', 'oct', 
+        'november', 'nov', 
+        'december', 'dec'
+      ),
+      $.number // until 12
+    ),
+
+    years: $ => seq(
+      $.number  
     ),
 
     entity_reference: $ => seq(

@@ -142,19 +142,47 @@
           "value": "id"
         },
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_id_new"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_id_block"
+            }
+          ]
+        }
+      ]
+    },
+    "_id_block": {
+      "type": "SEQ",
+      "members": [
+        {
           "type": "STRING",
           "value": "{"
         },
         {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_statement"
-          }
+          "type": "SYMBOL",
+          "name": "number"
         },
         {
           "type": "STRING",
           "value": "}"
+        }
+      ]
+    },
+    "_id_new": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "assignment"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "dynamic_id"
         }
       ]
     },
@@ -166,6 +194,24 @@
           "value": "date"
         },
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_date_new"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_date_block"
+            }
+          ]
+        }
+      ]
+    },
+    "_date_block": {
+      "type": "SEQ",
+      "members": [
+        {
           "type": "STRING",
           "value": "{"
         },
@@ -173,12 +219,25 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "_statement"
+            "name": "_date_options"
           }
         },
         {
           "type": "STRING",
           "value": "}"
+        }
+      ]
+    },
+    "_date_new": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "assignment"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "dynamic_date"
         }
       ]
     },
@@ -473,6 +532,273 @@
             }
           ]
         },
+        {
+          "type": "SYMBOL",
+          "name": "number"
+        }
+      ]
+    },
+    "dynamic_id": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "new"
+            },
+            {
+              "type": "STRING",
+              "value": "local"
+            }
+          ]
+        }
+      ]
+    },
+    "dynamic_date": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "now"
+            },
+            {
+              "type": "STRING",
+              "value": "yesterday"
+            },
+            {
+              "type": "STRING",
+              "value": "tomorrow"
+            },
+            {
+              "type": "STRING",
+              "value": "last month"
+            },
+            {
+              "type": "STRING",
+              "value": "next month"
+            },
+            {
+              "type": "STRING",
+              "value": "last quarter"
+            },
+            {
+              "type": "STRING",
+              "value": "next quarter"
+            },
+            {
+              "type": "STRING",
+              "value": "last year"
+            },
+            {
+              "type": "STRING",
+              "value": "next year"
+            }
+          ]
+        }
+      ]
+    },
+    "_date_options": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "days"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "months"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "years"
+            }
+          ]
+        }
+      ]
+    },
+    "days": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "monday"
+            },
+            {
+              "type": "STRING",
+              "value": "mon"
+            },
+            {
+              "type": "STRING",
+              "value": "tuesday"
+            },
+            {
+              "type": "STRING",
+              "value": "tue"
+            },
+            {
+              "type": "STRING",
+              "value": "wednesday"
+            },
+            {
+              "type": "STRING",
+              "value": "wed"
+            },
+            {
+              "type": "STRING",
+              "value": "thursday"
+            },
+            {
+              "type": "STRING",
+              "value": "thu"
+            },
+            {
+              "type": "STRING",
+              "value": "friday"
+            },
+            {
+              "type": "STRING",
+              "value": "fri"
+            },
+            {
+              "type": "STRING",
+              "value": "saturday"
+            },
+            {
+              "type": "STRING",
+              "value": "sat"
+            },
+            {
+              "type": "STRING",
+              "value": "sunday"
+            },
+            {
+              "type": "STRING",
+              "value": "sun"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "number"
+        }
+      ]
+    },
+    "months": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "january"
+            },
+            {
+              "type": "STRING",
+              "value": "jan"
+            },
+            {
+              "type": "STRING",
+              "value": "february"
+            },
+            {
+              "type": "STRING",
+              "value": "feb"
+            },
+            {
+              "type": "STRING",
+              "value": "march"
+            },
+            {
+              "type": "STRING",
+              "value": "mar"
+            },
+            {
+              "type": "STRING",
+              "value": "april"
+            },
+            {
+              "type": "STRING",
+              "value": "apr"
+            },
+            {
+              "type": "STRING",
+              "value": "may"
+            },
+            {
+              "type": "STRING",
+              "value": "may"
+            },
+            {
+              "type": "STRING",
+              "value": "june"
+            },
+            {
+              "type": "STRING",
+              "value": "jun"
+            },
+            {
+              "type": "STRING",
+              "value": "july"
+            },
+            {
+              "type": "STRING",
+              "value": "jul"
+            },
+            {
+              "type": "STRING",
+              "value": "august"
+            },
+            {
+              "type": "STRING",
+              "value": "aug"
+            },
+            {
+              "type": "STRING",
+              "value": "october"
+            },
+            {
+              "type": "STRING",
+              "value": "oct"
+            },
+            {
+              "type": "STRING",
+              "value": "november"
+            },
+            {
+              "type": "STRING",
+              "value": "nov"
+            },
+            {
+              "type": "STRING",
+              "value": "december"
+            },
+            {
+              "type": "STRING",
+              "value": "dec"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "number"
+        }
+      ]
+    },
+    "years": {
+      "type": "SEQ",
+      "members": [
         {
           "type": "SYMBOL",
           "name": "number"
