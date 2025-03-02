@@ -17,7 +17,12 @@ module.exports = grammar({
       $.entry,
       $.comment,
       $.assignment,
+      $.id,
+      $.date,
+      $.details,
       $.transaction,
+      $.transaction_to,
+      $.transaction_from,
       $.scoped_transaction,
       $.reference
     ),
@@ -25,15 +30,36 @@ module.exports = grammar({
     comment: $ => token(seq('//', /.*/)),
 
     entry: $ => seq(
-      'entry', '{',
-          repeat($._statement),
-          '}'
+      'entry',
+      '{',
+        repeat($._statement),
+      '}'
     ),
+
+    entry_keyword: $ => alias(token('entry'), 'entry_keyword'),
 
     reference: $ => seq(
       'reference', '{',
-          repeat($._statement),
-          '}'
+        repeat($._statement),
+      '}'
+    ),
+
+    id: $ => seq(
+      'id', '{',
+        repeat($._statement),
+      '}'
+    ),
+
+    date: $ => seq(
+      'date', '{',
+        repeat($._statement),
+      '}'
+    ),
+
+    details: $ => seq(
+      'details', '{',
+        repeat($._statement),
+      '}'
     ),
 
     assignment: $ => seq($.identifier, '=', $._value),
@@ -41,14 +67,25 @@ module.exports = grammar({
     transaction: $ => seq(
       'for', '(', $.entity_reference, ')', 'in', '(', $.entity_reference, ')', '{',
           repeat($._transaction_statement),
-          '}'
+      '}'
     ),
 
-    // Handles 'in (accounts->inventory->materials) { ... }'
+    transaction_to: $ => seq(
+      'to', '(', $.entity_reference, ')', 'in', '(', $.entity_reference, ')', '{',
+          repeat($._transaction_statement),
+      '}'
+    ),
+
+    transaction_from: $ => seq(
+      'from', '(', $.entity_reference, ')', 'in', '(', $.entity_reference, ')', '{',
+          repeat($._transaction_statement),
+      '}'
+    ),
+
     scoped_transaction: $ => seq(
       'in', '(', $.entity_reference, ')', '{',
           repeat(choice($.transaction, $._transaction_statement)),
-          '}'
+      '}'
     ),
 
     _transaction_statement: $ => choice(
@@ -65,19 +102,12 @@ module.exports = grammar({
       $.identifier, repeat(seq('->', $.identifier))
     ),
 
-    for_keyword: $ => token('for'),  // Explicit token for `for`
-    in_keyword: $ => token('in'),    // Explicit token for `in`
-
-    _arrow: $ => token('->'), // Explicit token for syntax highlighting
-
     identifier: $ => /[a-zA-Z_][a-zA-Z0-9_]*/,
-
     _value: $ => choice(
       $.number,
       $.string,
       $.boolean
     ),
-
     number: $ => /\d+(\.\d+)?/,
     string: $ => seq('{', /[^}]*/, '}'),
     boolean: $ => choice('true', 'false')

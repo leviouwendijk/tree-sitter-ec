@@ -26,7 +26,27 @@
         },
         {
           "type": "SYMBOL",
+          "name": "id"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "date"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "details"
+        },
+        {
+          "type": "SYMBOL",
           "name": "transaction"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "transaction_to"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "transaction_from"
         },
         {
           "type": "SYMBOL",
@@ -78,12 +98,96 @@
         }
       ]
     },
+    "entry_keyword": {
+      "type": "ALIAS",
+      "content": {
+        "type": "TOKEN",
+        "content": {
+          "type": "STRING",
+          "value": "entry"
+        }
+      },
+      "named": false,
+      "value": "entry_keyword"
+    },
     "reference": {
       "type": "SEQ",
       "members": [
         {
           "type": "STRING",
           "value": "reference"
+        },
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_statement"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "id": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "id"
+        },
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_statement"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "date": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "date"
+        },
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_statement"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "details": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "details"
         },
         {
           "type": "STRING",
@@ -125,6 +229,110 @@
         {
           "type": "STRING",
           "value": "for"
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "SYMBOL",
+          "name": "entity_reference"
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        },
+        {
+          "type": "STRING",
+          "value": "in"
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "SYMBOL",
+          "name": "entity_reference"
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        },
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_transaction_statement"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "transaction_to": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "to"
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "SYMBOL",
+          "name": "entity_reference"
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        },
+        {
+          "type": "STRING",
+          "value": "in"
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "SYMBOL",
+          "name": "entity_reference"
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        },
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_transaction_statement"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "transaction_from": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "from"
         },
         {
           "type": "STRING",
@@ -295,27 +503,6 @@
           }
         }
       ]
-    },
-    "for_keyword": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "for"
-      }
-    },
-    "in_keyword": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "in"
-      }
-    },
-    "_arrow": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "->"
-      }
     },
     "identifier": {
       "type": "PATTERN",

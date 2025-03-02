@@ -32,6 +32,116 @@
     "fields": {}
   },
   {
+    "type": "date",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "assignment",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "date",
+          "named": true
+        },
+        {
+          "type": "details",
+          "named": true
+        },
+        {
+          "type": "entry",
+          "named": true
+        },
+        {
+          "type": "id",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        },
+        {
+          "type": "scoped_transaction",
+          "named": true
+        },
+        {
+          "type": "transaction",
+          "named": true
+        },
+        {
+          "type": "transaction_from",
+          "named": true
+        },
+        {
+          "type": "transaction_to",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "details",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "assignment",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "date",
+          "named": true
+        },
+        {
+          "type": "details",
+          "named": true
+        },
+        {
+          "type": "entry",
+          "named": true
+        },
+        {
+          "type": "id",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        },
+        {
+          "type": "scoped_transaction",
+          "named": true
+        },
+        {
+          "type": "transaction",
+          "named": true
+        },
+        {
+          "type": "transaction_from",
+          "named": true
+        },
+        {
+          "type": "transaction_to",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "entity_reference",
     "named": true,
     "fields": {},
@@ -63,7 +173,19 @@
           "named": true
         },
         {
+          "type": "date",
+          "named": true
+        },
+        {
+          "type": "details",
+          "named": true
+        },
+        {
           "type": "entry",
+          "named": true
+        },
+        {
+          "type": "id",
           "named": true
         },
         {
@@ -76,6 +198,69 @@
         },
         {
           "type": "transaction",
+          "named": true
+        },
+        {
+          "type": "transaction_from",
+          "named": true
+        },
+        {
+          "type": "transaction_to",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "id",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "assignment",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "date",
+          "named": true
+        },
+        {
+          "type": "details",
+          "named": true
+        },
+        {
+          "type": "entry",
+          "named": true
+        },
+        {
+          "type": "id",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        },
+        {
+          "type": "scoped_transaction",
+          "named": true
+        },
+        {
+          "type": "transaction",
+          "named": true
+        },
+        {
+          "type": "transaction_from",
+          "named": true
+        },
+        {
+          "type": "transaction_to",
           "named": true
         }
       ]
@@ -98,7 +283,19 @@
           "named": true
         },
         {
+          "type": "date",
+          "named": true
+        },
+        {
+          "type": "details",
+          "named": true
+        },
+        {
           "type": "entry",
+          "named": true
+        },
+        {
+          "type": "id",
           "named": true
         },
         {
@@ -111,6 +308,14 @@
         },
         {
           "type": "transaction",
+          "named": true
+        },
+        {
+          "type": "transaction_from",
+          "named": true
+        },
+        {
+          "type": "transaction_to",
           "named": true
         }
       ]
@@ -161,7 +366,19 @@
           "named": true
         },
         {
+          "type": "date",
+          "named": true
+        },
+        {
+          "type": "details",
+          "named": true
+        },
+        {
           "type": "entry",
+          "named": true
+        },
+        {
+          "type": "id",
           "named": true
         },
         {
@@ -174,6 +391,14 @@
         },
         {
           "type": "transaction",
+          "named": true
+        },
+        {
+          "type": "transaction_from",
+          "named": true
+        },
+        {
+          "type": "transaction_to",
           "named": true
         }
       ]
@@ -201,6 +426,52 @@
   },
   {
     "type": "transaction",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "assignment",
+          "named": true
+        },
+        {
+          "type": "entity_reference",
+          "named": true
+        },
+        {
+          "type": "special_transaction",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "transaction_from",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "assignment",
+          "named": true
+        },
+        {
+          "type": "entity_reference",
+          "named": true
+        },
+        {
+          "type": "special_transaction",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "transaction_to",
     "named": true,
     "fields": {},
     "children": {
@@ -251,7 +522,15 @@
     "named": false
   },
   {
+    "type": "date",
+    "named": false
+  },
+  {
     "type": "debit",
+    "named": false
+  },
+  {
+    "type": "details",
     "named": false
   },
   {
@@ -264,6 +543,14 @@
   },
   {
     "type": "for",
+    "named": false
+  },
+  {
+    "type": "from",
+    "named": false
+  },
+  {
+    "type": "id",
     "named": false
   },
   {
@@ -296,6 +583,10 @@
   },
   {
     "type": "subtract",
+    "named": false
+  },
+  {
+    "type": "to",
     "named": false
   },
   {
