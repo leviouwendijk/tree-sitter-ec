@@ -307,25 +307,34 @@
         },
         {
           "type": "STRING",
-          "value": "("
-        },
-        {
-          "type": "SYMBOL",
-          "name": "entity_reference"
-        },
-        {
-          "type": "STRING",
-          "value": ")"
-        },
-        {
-          "type": "STRING",
           "value": "{"
         },
         {
           "type": "REPEAT",
           "content": {
-            "type": "SYMBOL",
-            "name": "_transaction_statement"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "transaction"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "transaction_to"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "transaction_from"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "scoped_transaction"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_transaction_statement"
+              }
+            ]
           }
         },
         {
@@ -376,8 +385,29 @@
         {
           "type": "REPEAT",
           "content": {
-            "type": "SYMBOL",
-            "name": "_transaction_statement"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "transaction"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "transaction_to"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "transaction_from"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "scoped_transaction"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_transaction_statement"
+              }
+            ]
           }
         },
         {
@@ -428,8 +458,29 @@
         {
           "type": "REPEAT",
           "content": {
-            "type": "SYMBOL",
-            "name": "_transaction_statement"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "transaction"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "transaction_to"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "transaction_from"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "scoped_transaction"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_transaction_statement"
+              }
+            ]
           }
         },
         {
@@ -469,6 +520,18 @@
               {
                 "type": "SYMBOL",
                 "name": "transaction"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "transaction_to"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "transaction_from"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "scoped_transaction"
               },
               {
                 "type": "SYMBOL",
@@ -539,88 +602,73 @@
       ]
     },
     "dynamic_id": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "new"
-            },
-            {
-              "type": "STRING",
-              "value": "local"
-            }
-          ]
+          "type": "STRING",
+          "value": "new"
+        },
+        {
+          "type": "STRING",
+          "value": "local"
         }
       ]
     },
     "dynamic_date": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "now"
-            },
-            {
-              "type": "STRING",
-              "value": "yesterday"
-            },
-            {
-              "type": "STRING",
-              "value": "tomorrow"
-            },
-            {
-              "type": "STRING",
-              "value": "last month"
-            },
-            {
-              "type": "STRING",
-              "value": "next month"
-            },
-            {
-              "type": "STRING",
-              "value": "last quarter"
-            },
-            {
-              "type": "STRING",
-              "value": "next quarter"
-            },
-            {
-              "type": "STRING",
-              "value": "last year"
-            },
-            {
-              "type": "STRING",
-              "value": "next year"
-            }
-          ]
+          "type": "STRING",
+          "value": "now"
+        },
+        {
+          "type": "STRING",
+          "value": "yesterday"
+        },
+        {
+          "type": "STRING",
+          "value": "tomorrow"
+        },
+        {
+          "type": "STRING",
+          "value": "last month"
+        },
+        {
+          "type": "STRING",
+          "value": "next month"
+        },
+        {
+          "type": "STRING",
+          "value": "last quarter"
+        },
+        {
+          "type": "STRING",
+          "value": "next quarter"
+        },
+        {
+          "type": "STRING",
+          "value": "last year"
+        },
+        {
+          "type": "STRING",
+          "value": "next year"
         }
       ]
     },
     "_date_options": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "days"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "months"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "years"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "days"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "months"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "years"
         }
       ]
     },

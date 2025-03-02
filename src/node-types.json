@@ -322,11 +322,23 @@
           "named": true
         },
         {
+          "type": "scoped_transaction",
+          "named": true
+        },
+        {
           "type": "special_transaction",
           "named": true
         },
         {
           "type": "transaction",
+          "named": true
+        },
+        {
+          "type": "transaction_from",
+          "named": true
+        },
+        {
+          "type": "transaction_to",
           "named": true
         }
       ]
@@ -425,7 +437,23 @@
           "named": true
         },
         {
+          "type": "scoped_transaction",
+          "named": true
+        },
+        {
           "type": "special_transaction",
+          "named": true
+        },
+        {
+          "type": "transaction",
+          "named": true
+        },
+        {
+          "type": "transaction_from",
+          "named": true
+        },
+        {
+          "type": "transaction_to",
           "named": true
         }
       ]
@@ -448,7 +476,23 @@
           "named": true
         },
         {
+          "type": "scoped_transaction",
+          "named": true
+        },
+        {
           "type": "special_transaction",
+          "named": true
+        },
+        {
+          "type": "transaction",
+          "named": true
+        },
+        {
+          "type": "transaction_from",
+          "named": true
+        },
+        {
+          "type": "transaction_to",
           "named": true
         }
       ]
@@ -471,7 +515,23 @@
           "named": true
         },
         {
+          "type": "scoped_transaction",
+          "named": true
+        },
+        {
           "type": "special_transaction",
+          "named": true
+        },
+        {
+          "type": "transaction",
+          "named": true
+        },
+        {
+          "type": "transaction_from",
+          "named": true
+        },
+        {
+          "type": "transaction_to",
           "named": true
         }
       ]

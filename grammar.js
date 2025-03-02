@@ -63,7 +63,6 @@ module.exports = grammar({
       $.dynamic_id
     ),
 
-
     date: $ => seq(
       'date',
         choice(
@@ -93,26 +92,26 @@ module.exports = grammar({
     assignment: $ => seq($.identifier, '=', $._value),
 
     transaction: $ => seq(
-      'for', '(', $.entity_reference, ')', 'in', '(', $.entity_reference, ')', '{',
-          repeat($._transaction_statement),
+      'for', '(', $.entity_reference, ')', 'in', '{',
+          repeat(choice($.transaction, $.transaction_to, $.transaction_from, $.scoped_transaction, $._transaction_statement)),
       '}'
     ),
 
     transaction_to: $ => seq(
       'to', '(', $.entity_reference, ')', 'in', '(', $.entity_reference, ')', '{',
-          repeat($._transaction_statement),
+          repeat(choice($.transaction, $.transaction_to, $.transaction_from, $.scoped_transaction, $._transaction_statement)),
       '}'
     ),
 
     transaction_from: $ => seq(
       'from', '(', $.entity_reference, ')', 'in', '(', $.entity_reference, ')', '{',
-          repeat($._transaction_statement),
+          repeat(choice($.transaction, $.transaction_to, $.transaction_from, $.scoped_transaction, $._transaction_statement)),
       '}'
     ),
 
     scoped_transaction: $ => seq(
       'in', '(', $.entity_reference, ')', '{',
-          repeat(choice($.transaction, $._transaction_statement)),
+          repeat(choice($.transaction, $.transaction_to, $.transaction_from, $.scoped_transaction, $._transaction_statement)),
       '}'
     ),
 
@@ -126,15 +125,12 @@ module.exports = grammar({
       $.number
     ),
 
-    dynamic_id: $ => seq(
-      choice(
+    dynamic_id: $ => choice(
         'new',
         'local'
-      ),
     ),
 
-    dynamic_date: $ => seq(
-      choice(
+    dynamic_date: $ => choice(
         'now',
         'yesterday',
         'tomorrow',
@@ -144,13 +140,10 @@ module.exports = grammar({
         'next quarter',
         'last year',
         'next year',
-      ),
     ),
 
-    _date_options: $ => seq(
-      choice(
+    _date_options: $ => choice(
         $.days, $.months, $.years
-      ),
     ),
 
     days: $ => seq(
