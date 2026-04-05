@@ -1,6 +1,84 @@
 [
   {
+    "type": "assignable",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "path",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "assignment",
+    "named": true,
+    "fields": {
+      "left": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "assignable",
+            "named": true
+          }
+        ]
+      },
+      "right": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "nil_literal",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "path",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "symbol",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "boolean",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "call_atom",
     "named": true,
     "fields": {},
     "children": {
@@ -12,7 +90,15 @@
           "named": true
         },
         {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "nil_literal",
           "named": true
         },
         {
@@ -20,19 +106,142 @@
           "named": true
         },
         {
-          "type": "string",
+          "type": "path",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "symbol",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "boolean",
+    "type": "call_statement",
     "named": true,
-    "fields": {}
+    "fields": {
+      "callee": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "->",
+            "named": false
+          },
+          {
+            "type": ".",
+            "named": false
+          },
+          {
+            "type": "path_segment",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "nil_literal",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "path",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "symbol",
+          "named": true
+        }
+      ]
+    }
   },
   {
-    "type": "date",
+    "type": "directive_statement",
+    "named": true,
+    "fields": {
+      "argument": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "nil_literal",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "paren_ref_list",
+            "named": true
+          },
+          {
+            "type": "path",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "symbol",
+            "named": true
+          }
+        ]
+      },
+      "head": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "entity_document",
     "named": true,
     "fields": {},
     "children": {
@@ -44,26 +253,423 @@
           "named": true
         },
         {
-          "type": "days",
+          "type": "call_statement",
           "named": true
         },
         {
-          "type": "dynamic_date",
+          "type": "comment",
           "named": true
         },
         {
-          "type": "months",
+          "type": "directive_statement",
           "named": true
         },
         {
-          "type": "years",
+          "type": "headed_block",
+          "named": true
+        },
+        {
+          "type": "simple_block",
+          "named": true
+        },
+        {
+          "type": "text_block",
+          "named": true
+        },
+        {
+          "type": "text_line",
+          "named": true
+        },
+        {
+          "type": "unit_block",
+          "named": true
+        },
+        {
+          "type": "use_alias_statement",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "days",
+    "type": "entry_document",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "assignment",
+          "named": true
+        },
+        {
+          "type": "call_statement",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "directive_statement",
+          "named": true
+        },
+        {
+          "type": "for_in_clause",
+          "named": true
+        },
+        {
+          "type": "headed_block",
+          "named": true
+        },
+        {
+          "type": "in_clause",
+          "named": true
+        },
+        {
+          "type": "simple_block",
+          "named": true
+        },
+        {
+          "type": "text_block",
+          "named": true
+        },
+        {
+          "type": "text_line",
+          "named": true
+        },
+        {
+          "type": "transaction_ref",
+          "named": true
+        },
+        {
+          "type": "transactions_block",
+          "named": true
+        },
+        {
+          "type": "unit_block",
+          "named": true
+        },
+        {
+          "type": "use_alias_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "for_in_clause",
+    "named": true,
+    "fields": {
+      "account": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paren_ref_list",
+            "named": true
+          }
+        ]
+      },
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "posting_body",
+            "named": true
+          }
+        ]
+      },
+      "entity": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "ref_target",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "headed_block",
+    "named": true,
+    "fields": {
+      "argument": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "nil_literal",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "paren_ref_list",
+            "named": true
+          },
+          {
+            "type": "path",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "symbol",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "assignment",
+          "named": true
+        },
+        {
+          "type": "call_statement",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "directive_statement",
+          "named": true
+        },
+        {
+          "type": "headed_block",
+          "named": true
+        },
+        {
+          "type": "simple_block",
+          "named": true
+        },
+        {
+          "type": "text_block",
+          "named": true
+        },
+        {
+          "type": "text_line",
+          "named": true
+        },
+        {
+          "type": "unit_block",
+          "named": true
+        },
+        {
+          "type": "use_alias_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "in_clause",
+    "named": true,
+    "fields": {
+      "account": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paren_ref_list",
+            "named": true
+          }
+        ]
+      },
+      "body": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "posting_body",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "nested_for_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "nested_for_clause",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "posting_body",
+            "named": true
+          }
+        ]
+      },
+      "entity": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "ref_target",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "paren_ref_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "path",
+          "named": true
+        },
+        {
+          "type": "symbol",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "path",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "path_segment",
+          "named": true
+        },
+        {
+          "type": "variant_suffix",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "path_segment",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "variant_suffix",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "posting_body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "assignment",
+          "named": true
+        },
+        {
+          "type": "call_statement",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "directive_statement",
+          "named": true
+        },
+        {
+          "type": "headed_block",
+          "named": true
+        },
+        {
+          "type": "simple_block",
+          "named": true
+        },
+        {
+          "type": "text_block",
+          "named": true
+        },
+        {
+          "type": "text_line",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ref_target",
     "named": true,
     "fields": {},
     "children": {
@@ -71,94 +677,30 @@
       "required": true,
       "types": [
         {
-          "type": "number",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "details",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "assignment",
+          "type": "call_atom",
           "named": true
         },
-        {
-          "type": "comment",
-          "named": true
-        },
-        {
-          "type": "date",
-          "named": true
-        },
-        {
-          "type": "details",
-          "named": true
-        },
-        {
-          "type": "entry",
-          "named": true
-        },
-        {
-          "type": "id",
-          "named": true
-        },
-        {
-          "type": "reference",
-          "named": true
-        },
-        {
-          "type": "scoped_transaction",
-          "named": true
-        },
-        {
-          "type": "transaction",
-          "named": true
-        },
-        {
-          "type": "transaction_from",
-          "named": true
-        },
-        {
-          "type": "transaction_to",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "dynamic_date",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "dynamic_id",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "entity_reference",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
         {
           "type": "identifier",
           "named": true
+        },
+        {
+          "type": "paren_ref_list",
+          "named": true
+        },
+        {
+          "type": "path",
+          "named": true
+        },
+        {
+          "type": "symbol",
+          "named": true
         }
       ]
     }
   },
   {
-    "type": "entry",
+    "type": "reference_document",
     "named": true,
     "fields": {},
     "children": {
@@ -170,88 +712,46 @@
           "named": true
         },
         {
+          "type": "call_statement",
+          "named": true
+        },
+        {
           "type": "comment",
           "named": true
         },
         {
-          "type": "date",
+          "type": "directive_statement",
           "named": true
         },
         {
-          "type": "details",
+          "type": "headed_block",
           "named": true
         },
         {
-          "type": "entry",
+          "type": "simple_block",
           "named": true
         },
         {
-          "type": "id",
+          "type": "text_block",
           "named": true
         },
         {
-          "type": "reference",
+          "type": "text_line",
           "named": true
         },
         {
-          "type": "scoped_transaction",
+          "type": "unit_block",
           "named": true
         },
         {
-          "type": "transaction",
-          "named": true
-        },
-        {
-          "type": "transaction_from",
-          "named": true
-        },
-        {
-          "type": "transaction_to",
+          "type": "use_alias_statement",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "id",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "assignment",
-          "named": true
-        },
-        {
-          "type": "dynamic_id",
-          "named": true
-        },
-        {
-          "type": "number",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "months",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "number",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "reference",
+    "type": "settings_document",
     "named": true,
     "fields": {},
     "children": {
@@ -263,82 +763,101 @@
           "named": true
         },
         {
+          "type": "call_statement",
+          "named": true
+        },
+        {
           "type": "comment",
           "named": true
         },
         {
-          "type": "date",
+          "type": "directive_statement",
           "named": true
         },
         {
-          "type": "details",
+          "type": "headed_block",
           "named": true
         },
         {
-          "type": "entry",
+          "type": "simple_block",
           "named": true
         },
         {
-          "type": "id",
+          "type": "text_block",
           "named": true
         },
         {
-          "type": "reference",
+          "type": "text_line",
           "named": true
         },
         {
-          "type": "scoped_transaction",
+          "type": "unit_block",
           "named": true
         },
         {
-          "type": "transaction",
-          "named": true
-        },
-        {
-          "type": "transaction_from",
-          "named": true
-        },
-        {
-          "type": "transaction_to",
+          "type": "use_alias_statement",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "scoped_transaction",
+    "type": "simple_block",
     "named": true,
-    "fields": {},
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "assignment",
           "named": true
         },
         {
-          "type": "entity_reference",
+          "type": "call_statement",
           "named": true
         },
         {
-          "type": "scoped_transaction",
+          "type": "comment",
           "named": true
         },
         {
-          "type": "special_transaction",
+          "type": "directive_statement",
           "named": true
         },
         {
-          "type": "transaction",
+          "type": "headed_block",
           "named": true
         },
         {
-          "type": "transaction_from",
+          "type": "simple_block",
           "named": true
         },
         {
-          "type": "transaction_to",
+          "type": "text_block",
+          "named": true
+        },
+        {
+          "type": "text_line",
+          "named": true
+        },
+        {
+          "type": "unit_block",
+          "named": true
+        },
+        {
+          "type": "use_alias_statement",
           "named": true
         }
       ]
@@ -362,50 +881,68 @@
           "named": true
         },
         {
-          "type": "date",
+          "type": "directive_statement",
           "named": true
         },
         {
-          "type": "details",
+          "type": "entity_document",
           "named": true
         },
         {
-          "type": "entry",
+          "type": "entry_document",
           "named": true
         },
         {
-          "type": "id",
+          "type": "reference_document",
           "named": true
         },
         {
-          "type": "reference",
-          "named": true
-        },
-        {
-          "type": "scoped_transaction",
-          "named": true
-        },
-        {
-          "type": "transaction",
-          "named": true
-        },
-        {
-          "type": "transaction_from",
-          "named": true
-        },
-        {
-          "type": "transaction_to",
+          "type": "settings_document",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "special_transaction",
+    "type": "text_block",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "details",
+            "named": false
+          },
+          {
+            "type": "display",
+            "named": false
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "text_line",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "transaction_ref",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
@@ -416,129 +953,138 @@
     }
   },
   {
-    "type": "string",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "transaction",
+    "type": "transactions_block",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
-          "type": "assignment",
+          "type": "comment",
           "named": true
         },
         {
-          "type": "entity_reference",
-          "named": true
-        },
-        {
-          "type": "scoped_transaction",
-          "named": true
-        },
-        {
-          "type": "special_transaction",
-          "named": true
-        },
-        {
-          "type": "transaction",
-          "named": true
-        },
-        {
-          "type": "transaction_from",
-          "named": true
-        },
-        {
-          "type": "transaction_to",
+          "type": "transaction_ref",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "transaction_from",
+    "type": "unit_block",
     "named": true,
-    "fields": {},
+    "fields": {
+      "alias": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "path",
+            "named": true
+          },
+          {
+            "type": "symbol",
+            "named": true
+          }
+        ]
+      },
+      "owner": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "path",
+            "named": true
+          },
+          {
+            "type": "symbol",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "assignment",
           "named": true
         },
         {
-          "type": "entity_reference",
+          "type": "call_statement",
           "named": true
         },
         {
-          "type": "scoped_transaction",
+          "type": "comment",
           "named": true
         },
         {
-          "type": "special_transaction",
+          "type": "directive_statement",
           "named": true
         },
         {
-          "type": "transaction",
+          "type": "headed_block",
           "named": true
         },
         {
-          "type": "transaction_from",
+          "type": "simple_block",
           "named": true
         },
         {
-          "type": "transaction_to",
+          "type": "text_block",
+          "named": true
+        },
+        {
+          "type": "text_line",
+          "named": true
+        },
+        {
+          "type": "unit_block",
+          "named": true
+        },
+        {
+          "type": "use_alias_statement",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "transaction_to",
+    "type": "use_alias_statement",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "assignment",
-          "named": true
-        },
-        {
-          "type": "entity_reference",
-          "named": true
-        },
-        {
-          "type": "scoped_transaction",
-          "named": true
-        },
-        {
-          "type": "special_transaction",
-          "named": true
-        },
-        {
-          "type": "transaction",
-          "named": true
-        },
-        {
-          "type": "transaction_from",
-          "named": true
-        },
-        {
-          "type": "transaction_to",
-          "named": true
-        }
-      ]
+    "fields": {
+      "alias": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "path",
+            "named": true
+          },
+          {
+            "type": "symbol",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
-    "type": "years",
+    "type": "variant_suffix",
     "named": true,
     "fields": {},
     "children": {
@@ -546,11 +1092,15 @@
       "required": true,
       "types": [
         {
-          "type": "number",
+          "type": "identifier",
           "named": true
         }
       ]
     }
+  },
+  {
+    "type": "#",
+    "named": false
   },
   {
     "type": "(",
@@ -561,7 +1111,15 @@
     "named": false
   },
   {
+    "type": ",",
+    "named": false
+  },
+  {
     "type": "->",
+    "named": false
+  },
+  {
+    "type": ".",
     "named": false
   },
   {
@@ -569,23 +1127,7 @@
     "named": false
   },
   {
-    "type": "add",
-    "named": false
-  },
-  {
-    "type": "apr",
-    "named": false
-  },
-  {
-    "type": "april",
-    "named": false
-  },
-  {
-    "type": "aug",
-    "named": false
-  },
-  {
-    "type": "august",
+    "type": "alias",
     "named": false
   },
   {
@@ -593,27 +1135,19 @@
     "named": true
   },
   {
-    "type": "credit",
-    "named": false
-  },
-  {
-    "type": "date",
-    "named": false
-  },
-  {
-    "type": "debit",
-    "named": false
-  },
-  {
-    "type": "dec",
-    "named": false
-  },
-  {
-    "type": "december",
-    "named": false
+    "type": "date_literal",
+    "named": true
   },
   {
     "type": "details",
+    "named": false
+  },
+  {
+    "type": "display",
+    "named": false
+  },
+  {
+    "type": "entity",
     "named": false
   },
   {
@@ -625,31 +1159,7 @@
     "named": false
   },
   {
-    "type": "feb",
-    "named": false
-  },
-  {
-    "type": "february",
-    "named": false
-  },
-  {
     "type": "for",
-    "named": false
-  },
-  {
-    "type": "fri",
-    "named": false
-  },
-  {
-    "type": "friday",
-    "named": false
-  },
-  {
-    "type": "from",
-    "named": false
-  },
-  {
-    "type": "id",
     "named": false
   },
   {
@@ -661,103 +1171,19 @@
     "named": false
   },
   {
-    "type": "jan",
-    "named": false
-  },
-  {
-    "type": "january",
-    "named": false
-  },
-  {
-    "type": "jul",
-    "named": false
-  },
-  {
-    "type": "july",
-    "named": false
-  },
-  {
-    "type": "jun",
-    "named": false
-  },
-  {
-    "type": "june",
-    "named": false
-  },
-  {
-    "type": "last month",
-    "named": false
-  },
-  {
-    "type": "last quarter",
-    "named": false
-  },
-  {
-    "type": "last year",
-    "named": false
-  },
-  {
-    "type": "local",
-    "named": false
-  },
-  {
-    "type": "mar",
-    "named": false
-  },
-  {
-    "type": "march",
-    "named": false
-  },
-  {
-    "type": "may",
-    "named": false
-  },
-  {
-    "type": "mon",
-    "named": false
-  },
-  {
-    "type": "monday",
-    "named": false
-  },
-  {
-    "type": "new",
-    "named": false
-  },
-  {
-    "type": "next month",
-    "named": false
-  },
-  {
-    "type": "next quarter",
-    "named": false
-  },
-  {
-    "type": "next year",
-    "named": false
-  },
-  {
-    "type": "nov",
-    "named": false
-  },
-  {
-    "type": "november",
-    "named": false
-  },
-  {
-    "type": "now",
-    "named": false
+    "type": "nil_literal",
+    "named": true
   },
   {
     "type": "number",
     "named": true
   },
   {
-    "type": "oct",
+    "type": "of",
     "named": false
   },
   {
-    "type": "october",
+    "type": "ref",
     "named": false
   },
   {
@@ -765,51 +1191,23 @@
     "named": false
   },
   {
-    "type": "remove",
+    "type": "settings",
     "named": false
   },
   {
-    "type": "rm",
-    "named": false
+    "type": "string_literal",
+    "named": true
   },
   {
-    "type": "sat",
-    "named": false
+    "type": "symbol",
+    "named": true
   },
   {
-    "type": "saturday",
-    "named": false
+    "type": "text_line",
+    "named": true
   },
   {
-    "type": "sub",
-    "named": false
-  },
-  {
-    "type": "subtract",
-    "named": false
-  },
-  {
-    "type": "sun",
-    "named": false
-  },
-  {
-    "type": "sunday",
-    "named": false
-  },
-  {
-    "type": "thu",
-    "named": false
-  },
-  {
-    "type": "thursday",
-    "named": false
-  },
-  {
-    "type": "to",
-    "named": false
-  },
-  {
-    "type": "tomorrow",
+    "type": "transactions",
     "named": false
   },
   {
@@ -817,23 +1215,11 @@
     "named": false
   },
   {
-    "type": "tue",
+    "type": "unit",
     "named": false
   },
   {
-    "type": "tuesday",
-    "named": false
-  },
-  {
-    "type": "wed",
-    "named": false
-  },
-  {
-    "type": "wednesday",
-    "named": false
-  },
-  {
-    "type": "yesterday",
+    "type": "use",
     "named": false
   },
   {

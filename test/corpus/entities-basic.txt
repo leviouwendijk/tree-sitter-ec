@@ -1,0 +1,61 @@
+==================
+entity company group
+==================
+
+entity {
+    use alias bol_com
+
+    display {
+        Bol.com
+    }
+
+    details {
+        Online marketplace and retailer
+    }
+}
+
+---
+
+(source_file
+    (entity_document
+        (use_alias_statement
+            (identifier))
+        (text_block
+            (text_line))
+        (text_block
+            (text_line))))
+
+==================
+entity headed block and divide call
+==================
+
+entity {
+    unit of marijn {
+        use alias standing_oak
+    }
+
+    ownership {
+        divide {
+            owner.marijn(50.00)
+        }
+    }
+}
+
+---
+
+(source_file
+    (entity_document
+        (unit_block
+            (identifier)
+            (use_alias_statement
+                (identifier)))
+        (simple_block
+            (identifier)
+            (simple_block
+                (identifier)
+                (call_statement
+                    (path_segment
+                        (identifier))
+                    (path_segment
+                        (identifier))
+                    (number))))))

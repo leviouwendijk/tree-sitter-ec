@@ -1,0 +1,110 @@
+==================
+entry basic for-in
+==================
+
+entry {
+    id = 9001
+
+    date = 2025-03-15
+
+    sort regular
+
+    details {
+        Rabobank monthly fee
+    }
+
+    for (rabobank) in (WBedAdlBan) {
+        debit = 12.50
+    }
+
+    for (balance.main) in (BLimBanRba) {
+        credit = 12.50
+    }
+}
+
+---
+
+(source_file
+    (entry_document
+        (assignment
+            (assignable
+                (identifier))
+            (number))
+        (assignment
+            (assignable
+                (identifier))
+            (date_literal))
+        (directive_statement
+            (identifier)
+            (identifier))
+        (text_block
+            (text_line))
+        (for_in_clause
+            (ref_target
+                (paren_ref_list
+                    (identifier)))
+            (paren_ref_list
+                (identifier))
+            (posting_body
+                (assignment
+                    (assignable
+                        (identifier))
+                    (number))))
+        (for_in_clause
+            (ref_target
+                (paren_ref_list
+                    (path
+                        (path_segment
+                            (identifier))
+                        (path_segment
+                            (identifier)))))
+            (paren_ref_list
+                (identifier))
+            (posting_body
+                (assignment
+                    (assignable
+                        (identifier))
+                    (number))))))
+
+==================
+entry nested for and transactions
+==================
+
+entry {
+    in (balance.main) {
+        for placeholder(service) {
+            debit = 20.00
+        }
+    }
+
+    transactions {
+        ref 1, 2, 3
+    }
+}
+
+---
+
+(source_file
+    (entry_document
+        (in_clause
+            (paren_ref_list
+                (path
+                    (path_segment
+                        (identifier))
+                    (path_segment
+                        (identifier))))
+            (nested_for_clause
+                (ref_target
+                    (call_atom
+                        (identifier)
+                        (identifier)))
+                (posting_body
+                    (assignment
+                        (assignable
+                            (identifier))
+                        (number)))))
+        (transactions_block
+            (transaction_ref
+                (number)
+                (number)
+                (number)))))

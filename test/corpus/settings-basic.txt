@@ -1,0 +1,30 @@
+==================
+settings basic
+==================
+
+settings {
+    entry {
+        default_timezone = Europe/Amsterdam
+    }
+
+    aggregation {
+        include_previous_periods = true
+    }
+}
+
+---
+
+(source_file
+    (settings_document
+        (simple_block
+            (identifier)
+            (assignment
+                (assignable
+                    (identifier))
+                (symbol)))
+        (simple_block
+            (identifier)
+            (assignment
+                (assignable
+                    (identifier))
+                (boolean)))))

@@ -1,204 +1,314 @@
 /**
-* @file Parser for entry compiler files.
-* @author Levi Ouwendijk <leviouwendijk@gmail.com>
-* @license MIT
-*/
+ * @file Parser for entry compiler files.
+ * @author Levi Ouwendijk <leviouwendijk@gmail.com>
+ * @license MIT
+ */
 
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
+const commaSep1 = (rule) => seq(rule, repeat(seq(",", rule)), optional(","));
+
 module.exports = grammar({
-  name: 'ec',
+    name: "ec",
 
-  rules: {
-    source_file: $ => repeat($._statement),
+    word: $ => $.identifier,
 
-    _statement: $ => choice(
-      $.entry,
-      $.comment,
-      $.assignment,
-      $.id,
-      $.date,
-      $.details,
-      $.transaction,
-      $.transaction_to,
-      $.transaction_from,
-      $.scoped_transaction,
-      $.reference
-    ),
+    extras: $ => [
+        /[\s\uFEFF\u2060\u200B]+/,
+    ],
 
-    comment: $ => token(seq('//', /.*/)),
+    conflicts: $ => [],
 
-    entry: $ => seq(
-      'entry',
-      '{',
-        repeat($._statement),
-      '}'
-    ),
+    rules: {
+        source_file: $ => repeat($._top_level_item),
 
-    entry_keyword: $ => alias(token('entry'), 'entry_keyword'),
-
-    reference: $ => seq(
-      'reference', '{',
-        repeat($._statement),
-      '}'
-    ),
-
-    id: $ => seq(
-      'id', 
-        choice(
-          $._id_new,
-          $._id_block
+        _top_level_item: $ => choice(
+            $.settings_document,
+            $.entity_document,
+            $.entry_document,
+            $.reference_document,
+            $.assignment,
+            $.directive_statement,
+            $.comment
         ),
-    ),
 
-    _id_block: $ => seq(
-      '{',
-          $.number,
-      '}'
-    ),
+        comment: $ => token(seq("//", /.*/)),
 
-    _id_new: $ => seq(
-      $.assignment,
-      $.dynamic_id
-    ),
+        settings_document: $ => seq(
+            "settings",
+            "{",
+            repeat($._generic_item),
+            "}"
+        ),
 
-    date: $ => seq(
-      'date',
-        choice(
-          $._date_new,
-          $._date_block
-        )
-    ),
-    
-    _date_block: $ => seq(
-      '{',
-        repeat($._date_options),
-      '}'
-    ),
+        entity_document: $ => seq(
+            "entity",
+            "{",
+            repeat($._generic_item),
+            "}"
+        ),
 
-    _date_new: $ => seq(
-      $.assignment,
-      $.dynamic_date
-    ),
+        entry_document: $ => seq(
+            "entry",
+            "{",
+            repeat($._entry_item),
+            "}"
+        ),
 
+        reference_document: $ => seq(
+            "reference",
+            "{",
+            repeat($._generic_item),
+            "}"
+        ),
 
-    details: $ => seq(
-      'details', '{',
-        repeat($._statement),
-      '}'
-    ),
+        _entry_item: $ => choice(
+            $.for_in_clause,
+            $.in_clause,
+            $.transactions_block,
+            $.transaction_ref,
+            $.use_alias_statement,
+            $.unit_block,
+            $.assignment,
+            $.directive_statement,
+            $.text_block,
+            $.simple_block,
+            $.headed_block,
+            $.call_statement,
+            $.comment,
+            $.text_line
+        ),
 
-    assignment: $ => seq($.identifier, '=', $._value),
+        _generic_item: $ => choice(
+            $.use_alias_statement,
+            $.unit_block,
+            $.assignment,
+            $.directive_statement,
+            $.text_block,
+            $.simple_block,
+            $.headed_block,
+            $.call_statement,
+            $.comment,
+            $.text_line
+        ),
 
-    transaction: $ => seq(
-      'for', '(', $.entity_reference, ')', 'in', '{',
-          repeat(choice($.transaction, $.transaction_to, $.transaction_from, $.scoped_transaction, $._transaction_statement)),
-      '}'
-    ),
+        assignment: $ => seq(
+            field("left", $.assignable),
+            "=",
+            field("right", $._value)
+        ),
 
-    transaction_to: $ => seq(
-      'to', '(', $.entity_reference, ')', 'in', '(', $.entity_reference, ')', '{',
-          repeat(choice($.transaction, $.transaction_to, $.transaction_from, $.scoped_transaction, $._transaction_statement)),
-      '}'
-    ),
+        assignable: $ => choice(
+            $.path,
+            $.identifier
+        ),
 
-    transaction_from: $ => seq(
-      'from', '(', $.entity_reference, ')', 'in', '(', $.entity_reference, ')', '{',
-          repeat(choice($.transaction, $.transaction_to, $.transaction_from, $.scoped_transaction, $._transaction_statement)),
-      '}'
-    ),
+        use_alias_statement: $ => prec(3, seq(
+            "use",
+            "alias",
+            field("alias", choice(
+                $.identifier,
+                $.symbol,
+                $.path
+            ))
+        )),
 
-    scoped_transaction: $ => seq(
-      'in', '(', $.entity_reference, ')', '{',
-          repeat(choice($.transaction, $.transaction_to, $.transaction_from, $.scoped_transaction, $._transaction_statement)),
-      '}'
-    ),
+        unit_block: $ => prec(3, seq(
+            "unit",
+            optional(seq(
+                "of",
+                field("owner", choice(
+                    $.identifier,
+                    $.symbol,
+                    $.path
+                ))
+            )),
+            optional(field("alias", choice(
+                $.identifier,
+                $.symbol,
+                $.path
+            ))),
+            "{",
+            repeat($._generic_item),
+            "}"
+        )),
 
-    _transaction_statement: $ => choice(
-      $.assignment,
-      $.special_transaction
-    ),
+        directive_statement: $ => prec.left(1, seq(
+            field("head", $.identifier),
+            repeat1(field("argument", $._directive_arg))
+        )),
 
-    special_transaction: $ => seq(
-      choice('add', 'rm', 'remove', 'sub', 'subtract', 'credit', 'debit'),
-      $.number
-    ),
+        text_block: $ => seq(
+            field("name", choice("display", "details")),
+            "{",
+            repeat(choice(
+                $.comment,
+                $.text_line
+            )),
+            "}"
+        ),
 
-    dynamic_id: $ => choice(
-        'new',
-        'local'
-    ),
+        simple_block: $ => seq(
+            field("name", $.identifier),
+            "{",
+            repeat($._generic_item),
+            "}"
+        ),
 
-    dynamic_date: $ => choice(
-        'now',
-        'yesterday',
-        'tomorrow',
-        'last month',
-        'next month',
-        'last quarter',
-        'next quarter',
-        'last year',
-        'next year',
-    ),
+        headed_block: $ => seq(
+            field("name", $.identifier),
+            repeat1(field("argument", $._directive_arg)),
+            "{",
+            repeat($._generic_item),
+            "}"
+        ),
 
-    _date_options: $ => choice(
-        $.days, $.months, $.years
-    ),
+        call_statement: $ => seq(
+            field("callee", seq(
+                $.path_segment,
+                repeat1(seq(choice("->", "."), $.path_segment))
+            )),
+            "(",
+            optional(commaSep1($._value)),
+            ")"
+        ),
 
-    days: $ => seq(
-      choice(
-        'monday', 
-        'mon', 
-        'tuesday', 
-        'tue', 
-        'wednesday', 
-        'wed', 
-        'thursday', 
-        'thu', 
-        'friday', 
-        'fri', 
-        'saturday', 
-        'sat', 
-        'sunday', 
-        'sun', 
-      ),
-      $.number // until 7?
-    ),
+        for_in_clause: $ => seq(
+            "for",
+            field("entity", $.ref_target),
+            "in",
+            field("account", $.paren_ref_list),
+            field("body", $.posting_body)
+        ),
 
-    months: $ => seq(
-      choice(
-        'january', 'jan', 
-        'february', 'feb', 
-        'march', 'mar', 
-        'april', 'apr', 
-        'may', 'may', 
-        'june', 'jun', 
-        'july', 'jul', 
-        'august', 'aug', 
-        'october', 'oct', 
-        'november', 'nov', 
-        'december', 'dec'
-      ),
-      $.number // until 12
-    ),
+        in_clause: $ => seq(
+            "in",
+            field("account", $.paren_ref_list),
+            choice(
+                field("body", $.posting_body),
+                seq(
+                    "{",
+                    repeat1($.nested_for_clause),
+                    "}"
+                )
+            )
+        ),
 
-    years: $ => seq(
-      $.number  
-    ),
+        nested_for_clause: $ => seq(
+            "for",
+            field("entity", $.ref_target),
+            field("body", $.posting_body)
+        ),
 
-    entity_reference: $ => seq(
-      $.identifier, repeat(seq('->', $.identifier))
-    ),
+        posting_body: $ => seq(
+            "{",
+            repeat(choice(
+                $.assignment,
+                $.directive_statement,
+                $.text_block,
+                $.simple_block,
+                $.headed_block,
+                $.call_statement,
+                $.comment,
+                $.text_line
+            )),
+            "}"
+        ),
 
-    identifier: $ => /[a-zA-Z_][a-zA-Z0-9_]*/,
-    _value: $ => choice(
-      $.number,
-      $.string,
-      $.boolean
-    ),
-    number: $ => /\d+(\.\d+)?/,
-    string: $ => seq('{', /[^}]*/, '}'),
-    boolean: $ => choice('true', 'false')
-  }
+        transactions_block: $ => seq(
+            "transactions",
+            "{",
+            repeat(choice(
+                $.transaction_ref,
+                $.comment
+            )),
+            "}"
+        ),
+
+        transaction_ref: $ => seq(
+            "ref",
+            commaSep1($.number)
+        ),
+
+        ref_target: $ => choice(
+            $.paren_ref_list,
+            $.call_atom,
+            $.path,
+            $.identifier,
+            $.symbol
+        ),
+
+        paren_ref_list: $ => seq(
+            "(",
+            commaSep1(choice(
+                $.path,
+                $.identifier,
+                $.symbol
+            )),
+            ")"
+        ),
+
+        path: $ => choice(
+            seq(
+                $.path_segment,
+                repeat1(seq(choice("->", "."), $.path_segment))
+            ),
+            seq(
+                $.identifier,
+                repeat1($.variant_suffix)
+            )
+        ),
+
+        path_segment: $ => seq(
+            $.identifier,
+            repeat($.variant_suffix)
+        ),
+
+        call_atom: $ => seq(
+            $.identifier,
+            "(",
+            optional(commaSep1($._value)),
+            ")"
+        ),
+
+        variant_suffix: $ => seq(
+            "#",
+            $.identifier
+        ),
+
+        _directive_arg: $ => choice(
+            $.paren_ref_list,
+            $.date_literal,
+            $.number,
+            $.string_literal,
+            $.boolean,
+            $.nil_literal,
+            $.identifier,
+            $.symbol,
+            $.path
+        ),
+
+        _value: $ => choice(
+            $.date_literal,
+            $.number,
+            $.string_literal,
+            $.boolean,
+            $.nil_literal,
+            $.identifier,
+            $.symbol,
+            $.path
+        ),
+
+        date_literal: $ => token(/\d{4}-\d{2}-\d{2}/),
+        number: $ => token(/-?\d+(?:\.\d+)?/),
+        string_literal: $ => token(seq('"', repeat(choice(/[^"\\]+/, /\\./)), '"')),
+        nil_literal: $ => "nil",
+        boolean: $ => choice("true", "false"),
+
+        identifier: $ => token(/[A-Za-z_][A-Za-z0-9_]*/),
+        symbol: $ => token(/[A-Za-z_][A-Za-z0-9_]*(?:\/[A-Za-z0-9_]+)+/),
+
+        text_line: $ => token(prec(-1, /[^{}\n][^{}\n]*/)),
+    }
 });
