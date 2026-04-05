@@ -257,6 +257,10 @@
           "named": true
         },
         {
+          "type": "collapses_statement",
+          "named": true
+        },
+        {
           "type": "comment",
           "named": true
         },
@@ -1129,6 +1133,10 @@
   {
     "type": "alias",
     "named": false
+  },
+  {
+    "type": "collapses_statement",
+    "named": true
   },
   {
     "type": "comment",

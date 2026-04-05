@@ -45,7 +45,7 @@ module.exports = grammar({
         entity_document: $ => seq(
             "entity",
             "{",
-            repeat($._generic_item),
+            repeat($._entity_item),
             "}"
         ),
 
@@ -78,6 +78,11 @@ module.exports = grammar({
             $.call_statement,
             $.comment,
             $.text_line
+        ),
+
+        _entity_item: $ => choice(
+            $.collapses_statement,
+            $._generic_item
         ),
 
         _generic_item: $ => choice(
@@ -133,6 +138,8 @@ module.exports = grammar({
             repeat($._generic_item),
             "}"
         )),
+
+        collapses_statement: $ => "collapses",
 
         directive_statement: $ => prec.left(1, seq(
             field("head", $.identifier),

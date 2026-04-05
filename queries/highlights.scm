@@ -216,3 +216,5 @@
 
 (path_segment
     (identifier) @variable)
+
+(collapses_statement) @keyword

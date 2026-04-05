@@ -59,3 +59,27 @@ entity {
                     (path_segment
                         (identifier))
                     (number))))))
+
+==================
+entity collapses flag
+==================
+
+entity {
+    use alias reallocation
+
+    collapses
+
+    display {
+        Reallocation
+    }
+}
+
+---
+
+(source_file
+    (entity_document
+        (use_alias_statement
+            (identifier))
+        (collapses_statement)
+        (text_block
+            (text_line))))

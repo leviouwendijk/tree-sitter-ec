@@ -98,7 +98,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "_generic_item"
+            "name": "_entity_item"
           }
         },
         {
@@ -213,6 +213,19 @@
         {
           "type": "SYMBOL",
           "name": "text_line"
+        }
+      ]
+    },
+    "_entity_item": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "collapses_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_generic_item"
         }
       ]
     },
@@ -431,6 +444,10 @@
           }
         ]
       }
+    },
+    "collapses_statement": {
+      "type": "STRING",
+      "value": "collapses"
     },
     "directive_statement": {
       "type": "PREC_LEFT",
