@@ -8,6 +8,7 @@ node_modules/
 
 # Swift artifacts
 .build/
+.index-build/
 
 # Go artifacts
 _obj/
@@ -46,4 +47,3 @@ zig-out/
 *.tgz
 *.zip
 
-.index-build/
